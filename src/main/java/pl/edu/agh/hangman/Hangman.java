@@ -3,72 +3,15 @@ package pl.edu.agh.hangman;
 import java.util.Scanner;
 
 public class Hangman {
-    //private static final String slowo = slowa[(int) (Math.random() * slowa.length)];
     static RandomWord randomWord = new RandomWord();
+
     static String slowo = randomWord.randomWord();
     private static String guessingWord = new String(new char[slowo.length()]).replace("\0", "_");
     private static int count = 0;
 
-    public static final String[] HANGMANPICS = new String[]{
-            "  +---+\n" +
-                    "  |   |\n" +
-                    "      |\n" +
-                    "      |\n" +
-                    "      |\n" +
-                    "      |\n" +
-                    "=========",
-            "  +---+\n" +
-                    "  |   |\n" +
-                    "  O   |\n" +
-                    "      |\n" +
-                    "      |\n" +
-                    "      |\n" +
-                    "=========",
-            "  +---+\n" +
-                    "  |   |\n" +
-                    "  O   |\n" +
-                    "  |   |\n" +
-                    "      |\n" +
-                    "      |\n" +
-                    "=========",
-            "  +---+\n" +
-                    "  |   |\n" +
-                    "  O   |\n" +
-                    " /|   |\n" +
-                    "      |\n" +
-                    "      |\n" +
-                    "=========",
-            "  +---+\n" +
-                    "  |   |\n" +
-                    "  O   |\n" +
-                    " /|\\  |\n" +
-                    "      |\n" +
-                    "      |\n" +
-                    "=========",
-            "  +---+\n" +
-                    "  |   |\n" +
-                    "  O   |\n" +
-                    " /|\\  |\n" +
-                    " /    |\n" +
-                    "      |\n" +
-                    "=========",
-            "  +---+\n" +
-                    "  |   |\n" +
-                    "  O   |\n" +
-                    " /|\\  |\n" +
-                    " / \\  |\n" +
-                    "      |\n" +
-                    "========"
-    };
-
-    public static void main(String[] args) {
-        System.out.println(slowo);
-        mainLoop();
-    }
-
-    public static void mainLoop(){
+    public void mainLoop(){
         Scanner sc = new Scanner(System.in);
-        while (count < 7 && guessingWord.contains("_")) {
+        while (count < 6 && guessingWord.contains("_")) {
             System.out.println("guess a letter>>");
             System.out.println(guessingWord);
             String userGuess = sc.next().toUpperCase();
@@ -77,6 +20,7 @@ public class Hangman {
         sc.close();
     }
     public static void guessingloop(String guess) {
+        PrinterHangman printerHangman = new PrinterHangman();
         StringBuilder guessingWordNew = new StringBuilder();
         for (int i = 0; i < slowo.length(); i++) {
             if (slowo.charAt(i) == guess.charAt(0)) {
@@ -89,9 +33,10 @@ public class Hangman {
         }
         if (guessingWord.equals(guessingWordNew.toString())) {
             count++;
-            System.out.println("chlopek"+count);
+            printerHangman.printHangman(count);
         } else {
             guessingWord = guessingWordNew.toString();
+            printerHangman.printHangman(count);
         }
         if (guessingWord.equals(slowo)) {
             System.out.println("You win! Word was: " + slowo);
