@@ -54,7 +54,7 @@ public class PrinterHangman {
                     "========"
     };
 
-    public static void printHangman(int round){
+    public void printHangman(int round){
         System.out.println(HANGMANPICS[round]);
     }
 }

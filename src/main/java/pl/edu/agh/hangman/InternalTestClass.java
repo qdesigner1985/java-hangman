@@ -8,9 +8,13 @@ import java.util.Random;
 public class InternalTestClass {
 
     public static void main(String[] args) {
-        RandomWord lotteryWord = new RandomWord();
 
-        System.out.println(lotteryWord.randomWord());
+        FileReader fileReader = new FileReader();
+        RandomWord randomWord = new RandomWord();
+
+        List<String> words = fileReader.readFile("src/main/resources/slowa.txt");
+        System.out.println(randomWord.randomWord(words));
+
 
 
     }
