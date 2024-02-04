@@ -10,21 +10,8 @@ import java.util.Random;
 public class RandomWord {
 
     private String word;
-    private List<String> words = new ArrayList<>();
 
-
-    public String randomWord(){
-        try {
-            File file = new File("src/main/resources/slowa.txt");
-            Scanner scanner = new Scanner(file);
-            while (scanner.hasNextLine()){
-                String text = scanner.nextLine();
-                words.add(text);
-            }
-            scanner.close();
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+    public String randomWord(List<String> words){
 
         Random random = new Random();
         int randomNum = random.nextInt(words.size());

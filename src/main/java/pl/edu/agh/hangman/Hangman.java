@@ -3,14 +3,16 @@ package pl.edu.agh.hangman;
 import java.util.Scanner;
 
 public class Hangman {
-    static RandomWord randomWord = new RandomWord();
+    FileReader fileReader = new FileReader();
+    RandomWord randomWord = new RandomWord();
 
-    static String slowo = randomWord.randomWord();
-    private static String guessingWord = new String(new char[slowo.length()]).replace("\0", "_");
+    String slowo = randomWord.randomWord(fileReader.readFile("src/main/resources/slowa.txt"));
+    private String guessingWord = new String(new char[slowo.length()]).replace("\0", "_");
     private static int count = 0;
 
     public void mainLoop(){
         Scanner sc = new Scanner(System.in);
+        System.out.println(slowo);
         while (count < 6 && guessingWord.contains("_")) {
             System.out.println("guess a letter>>");
             System.out.println(guessingWord);
@@ -19,7 +21,7 @@ public class Hangman {
         }
         sc.close();
     }
-    public static void guessingloop(String guess) {
+    public void guessingloop(String guess) {
         PrinterHangman printerHangman = new PrinterHangman();
         StringBuilder guessingWordNew = new StringBuilder();
         for (int i = 0; i < slowo.length(); i++) {
@@ -31,7 +33,7 @@ public class Hangman {
                 guessingWordNew.append("_");
             }
         }
-        if (guessingWord.equals(guessingWordNew.toString())) {
+        if (guessingWord.contentEquals(guessingWordNew)) {
             count++;
             printerHangman.printHangman(count);
         } else {
