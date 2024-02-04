@@ -27,8 +27,8 @@ public class RandomWord {
         }
 
         Random random = new Random();
-        int randomNum = random.nextInt(words.size() + 1);
+        int randomNum = random.nextInt(words.size());
 
-        return words.get(randomNum);
+        return words.get(randomNum).toUpperCase();
     }
 }
